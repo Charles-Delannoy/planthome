@@ -9,6 +9,11 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "vite": "^2.6.13",
+    "vite-plugin-ruby": "^3.0.2",
     "webpack-dev-server": "^4.4.0"
+  },
+  "scripts": {
+    "dev": "bin/vite dev"
   }
 }
