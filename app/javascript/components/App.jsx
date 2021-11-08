@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+import HomePage from './HomePage'
 
 const App = () => {
   return (
     <div>
-      PlantHome
+      <HomePage />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
