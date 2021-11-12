@@ -1,13 +1,13 @@
 .footer {
-  background-color: $blue;
+  background-color: $green;
   position: absolute;
   bottom: 0;
   width: 100vw;
   color: #fff;
-  height: 75px;
+  height: $footer-height;
   font-size: 35px;
   display: flex;
-
+  border-top: thin solid #fff;
   .menu-btn{
     width: 25vw;
     line-height: 75px;

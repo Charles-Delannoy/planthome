@@ -1,6 +1,7 @@
 .header {
   background-color: $green;
-  height: 55px;
+  height: $header-height;
+  border-bottom: thin solid #fff;
   h1 {
     line-height: 55px;;
     font-weight: 200;
