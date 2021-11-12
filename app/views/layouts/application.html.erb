@@ -8,10 +8,11 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'index.jsx' %>
-
+    <meta name='viewport' content='viewport-fit=cover, width=device-width, initial-scale=1.0, shrink-to-fit=no'>
 
   </head>
   <body>
+    <%= render 'shared/flashes' %>
     <%= yield %>
   </body>
 </html>

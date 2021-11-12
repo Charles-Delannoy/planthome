@@ -1,0 +1,30 @@
+.alert {
+  position: absolute;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  bottom: 20px;
+  right: 20px;
+  button {
+    font-size: 16px;
+    border: none;
+  }
+}
+
+.alert-info {
+  background-color: #064789;
+  color: #fff;
+  button {
+    background-color: #064789;
+    color: #fff;
+  }
+}
+
+.alert-warning {
+  background-color: #897506;
+  color: #fff;
+  button {
+    background-color: #897506;
+    color: #fff;
+  }
+}
