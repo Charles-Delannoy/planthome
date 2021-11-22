@@ -6,7 +6,7 @@ import Header from './shared/Header'
 import Footer from './shared/Footer'
 
 const HomePage = () => {
-  const { handleLogin, handleLogout } = useContext(SessionContext)
+  const { handleLogin, handleLogout, isLoggedIn } = useContext(SessionContext)
 
   const Logout = (event) => {
     event.preventDefault()
@@ -25,9 +25,7 @@ const HomePage = () => {
     <>
       <Header />
       <div className="home-content">
-        <Link to='/login'>Log In</Link>
-        <Link to='/signup'>Sign Up</Link>
-        <a onClick={Logout} href="">Log out</a>
+        {isLoggedIn && <a onClick={Logout} href="">Log out</a>}
       </div>
       <Footer />
     </>
