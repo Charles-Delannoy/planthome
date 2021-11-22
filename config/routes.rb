@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show, :index]
 
   get '/home', to: 'pages#application'
+  get '/login', to: 'pages#application'
+  get '/signup', to: 'pages#application'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

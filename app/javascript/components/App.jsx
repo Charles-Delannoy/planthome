@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import SessionContextProvider from './contexts/SessionContext'
 import HomePage from './HomePage'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import axios from 'axios'
+import Login from './Login'
+import Signup from './Signup'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import withLogin from './hoc/WithLogin'
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -11,39 +14,32 @@ const App = () => {
     setIsLoggedIn(true)
     setUser(data.user)
   }
+
   const handleLogout = () => {
     setIsLoggedIn(false)
     setUser({})
   }
 
-  const loginStatus = () => {
-    axios.get('http://localhost:3001/logged_in',
-              { withCredentials: true })
-         .then(response => {
-           if (response.data.logged_in) {
-             handleLogin(response)
-           } else {
-             handleLogout()
-           }
-          })
-          .catch(error => console.log('api errors:', error))
-  }
-
-  useEffect(() => {
-    loginStatus();
-  }, [])
-
   return (
-    <div>
+    <SessionContextProvider>
       <Router>
-        <Routes>
-          <Route path="/" exact element={<HomePage />} />
-          <Route path="/home" exact element={<HomePage />} />
-          <Route exact path='/login' component={ } />
-          <Route exact path='/signup' component={ } />
-        </Routes>
+        <Switch>
+          <Route path="/" exact component={ HomePage } />
+          <Route
+            path="/home" exact
+            component={withLogin(props =>
+              <HomePage
+                handleLogin = { handleLogin }
+                handleLogout = { handleLogout }
+                {...props}
+              />
+            ) }
+          />
+          <Route exact path='/login' component={ Login } />
+          <Route exact path='/signup' component={ Signup } />
+        </Switch>
       </Router>
-    </div>
+    </SessionContextProvider>
   )
 }
 
