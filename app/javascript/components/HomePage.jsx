@@ -10,7 +10,7 @@ const HomePage = () => {
 
   const Logout = (event) => {
     event.preventDefault()
-    axios.post('http://localhost:3001/logout')
+    axios.post(`/logout`)
       .then(response => {
         if (response.data.logged_in) {
           handleLogin(response)
