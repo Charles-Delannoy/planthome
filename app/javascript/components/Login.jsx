@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { SessionContext } from './contexts/SessionContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 
 const Login = (props) => {
+  const { handleLogin } = useContext(SessionContext)
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -16,9 +18,29 @@ const Login = (props) => {
     eval(`set${name}`)(value)
   };
 
+  const redirect = () => {
+    props.history.push(props.history.location.previous)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-  };
+    let user = {
+      username: username,
+      email: email,
+      password: password
+    }
+
+    axios.post('http://localhost:3001/login', { user }, { withCredentials: true })
+      .then(response => {
+        if (response.data.logged_in) {
+          handleLogin(response.data)
+          redirect()
+        } else {
+          setErrors(response.data.errors)
+        }
+      })
+      .catch(error => console.log('api errors:', error))
+  }
 
   return(
     <>
@@ -51,7 +73,7 @@ const Login = (props) => {
             Log In
           </button>
           <div>
-            or <Link to='/signup' params={props}>sign up</Link>
+            or <Link to={{ pathname: "/signup", previous: props.history.location.previous }} >sign up</Link>
           </div>
 
         </form>

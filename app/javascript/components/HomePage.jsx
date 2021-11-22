@@ -1,12 +1,15 @@
 import React, { useContext } from 'react'
 import { SessionContext } from './contexts/SessionContext'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 
 const HomePage = () => {
-  const value = useContext(SessionContext)
-  const Logout = () => {
+  const { handleLogin, handleLogout } = useContext(SessionContext)
+
+  const Logout = (event) => {
+    event.preventDefault()
     axios.post('http://localhost:3001/logout')
       .then(response => {
         if (response.data.logged_in) {

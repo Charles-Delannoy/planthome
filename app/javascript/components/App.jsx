@@ -35,8 +35,8 @@ const App = () => {
               />
             ) }
           />
-          <Route exact path='/login' component={ Login } />
-          <Route exact path='/signup' component={ Signup } />
+          <Route exact path='/login' render={ props => <Login {...props} /> } />
+          <Route exact path='/signup' render={ props => <Signup {...props} /> } />
         </Switch>
       </Router>
     </SessionContextProvider>

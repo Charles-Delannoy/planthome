@@ -10,6 +10,7 @@ const withLogin = (Component) => (props) => {
     axios.get('http://localhost:3001/logged_in',
       { withCredentials: true })
       .then(response => {
+        console.log(response)
         if (response.data.logged_in) {
           handleLogin(response)
         } else {
@@ -24,7 +25,7 @@ const withLogin = (Component) => (props) => {
   }, [])
 
   return (
-    isLoggedIn ? <Component {...props} /> : <Redirect to="/login" params={props}/>
+    isLoggedIn ? <Component {...props} /> : <Redirect to={{pathname: "/login", previous: window.location.pathname}} />
   )
 }
 

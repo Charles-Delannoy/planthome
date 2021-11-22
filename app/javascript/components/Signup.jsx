@@ -19,7 +19,7 @@ const Signup = (props) => {
   };
 
   const redirect = () => {
-    props.history.push('/')
+    props.history.push(props.history.location.previous)
   }
 
   const handleSubmit = (event) => {
@@ -87,4 +87,5 @@ const Signup = (props) => {
     </>
   )
 }
+
 export default Signup;
