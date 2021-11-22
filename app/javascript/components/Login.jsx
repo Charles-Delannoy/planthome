@@ -9,7 +9,6 @@ const Login = (props) => {
   const { handleLogin } = useContext(SessionContext)
 
   const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState('')
 
@@ -26,7 +25,6 @@ const Login = (props) => {
     event.preventDefault()
     let user = {
       username: username,
-      email: email,
       password: password
     }
 
@@ -53,13 +51,6 @@ const Login = (props) => {
             type="text"
             name="Username"
             value={username}
-            onChange={handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="Email"
-            value={email}
             onChange={handleChange}
           />
           <input

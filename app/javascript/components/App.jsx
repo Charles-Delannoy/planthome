@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SessionContextProvider from './contexts/SessionContext'
 import HomePage from './HomePage'
+import Alert from './Alert'
 import Login from './Login'
 import Signup from './Signup'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
@@ -22,6 +23,7 @@ const App = () => {
 
   return (
     <SessionContextProvider>
+      <Alert />
       <Router>
         <Switch>
           <Route path="/" exact component={ HomePage } />
