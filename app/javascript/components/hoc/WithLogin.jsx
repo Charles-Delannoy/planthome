@@ -4,13 +4,12 @@ import { Redirect } from "react-router-dom"
 import axios from 'axios'
 
 const withLogin = (Component) => (props) => {
-  const { isLoggedIn, handleLogin, handleLogout } = useContext(SessionContext)
+  const { isLoggedIn, handleLogin, handleLogout, loaded } = useContext(SessionContext)
 
   const loginStatus = () => {
     axios.get('http://localhost:3001/logged_in',
       { withCredentials: true })
       .then(response => {
-        console.log(response)
         if (response.data.logged_in) {
           handleLogin(response)
         } else {
@@ -21,9 +20,16 @@ const withLogin = (Component) => (props) => {
   }
 
   useEffect(() => {
-    loginStatus();
+    if (!isLoggedIn) {
+      loginStatus();
+    }
   }, [])
 
+  if (!loaded) {
+    return (
+    <div>Loading...</div>
+    )
+  }
   return (
     isLoggedIn ? <Component {...props} /> : <Redirect to={{pathname: "/login", previous: window.location.pathname}} />
   )

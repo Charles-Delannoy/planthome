@@ -2,4 +2,5 @@
   background-image: image-url("plants.jpeg");
   height: calc(100vh - #{$header-height} - #{$footer-height});
   background-size: cover;
+  padding: 10px;
 }

@@ -31,7 +31,7 @@ const Login = (props) => {
     axios.post(`/login`, { user }, { withCredentials: true })
       .then(response => {
         if (response.data.logged_in) {
-          handleLogin(response.data)
+          handleLogin(response)
           redirect()
         } else {
           setErrors(response.data.errors)

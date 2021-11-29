@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SessionContextProvider from './contexts/SessionContext'
 import HomePage from './HomePage'
+import Profile from './Profile'
 import Alert from './Alert'
 import Login from './Login'
 import Signup from './Signup'
@@ -30,7 +31,7 @@ const App = () => {
           <Route
             path="/home" exact
             component={withLogin(props =>
-              <HomePage
+              <Profile
                 handleLogin = { handleLogin }
                 handleLogout = { handleLogout }
                 {...props}
