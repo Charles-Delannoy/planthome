@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SessionContextProvider from './contexts/SessionContext'
 import HomePage from './HomePage'
 import Profile from './Profile'
+import Search from './Search'
 import Alert from './Alert'
 import Login from './Login'
 import Signup from './Signup'
@@ -40,6 +41,7 @@ const App = () => {
           />
           <Route exact path='/login' render={ props => <Login {...props} /> } />
           <Route exact path='/signup' render={ props => <Signup {...props} /> } />
+          <Route exact path='/search' render={props => <Search {...props} />} />
         </Switch>
       </Router>
     </SessionContextProvider>

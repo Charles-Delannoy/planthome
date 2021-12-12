@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div className='footer'>
       <Link to='/home' className='menu-btn'><FontAwesomeIcon icon={faHome} /></Link>
-      <div className='menu-btn'><FontAwesomeIcon icon={faSearch} /></div>
+      <Link to='/search' className='menu-btn'><FontAwesomeIcon icon={faSearch} /></Link>
       <div className='menu-btn'><FontAwesomeIcon icon={faPagelines} /></div>
       <div className='menu-btn'><FontAwesomeIcon icon={faTint} /></div>
     </div>

@@ -1,0 +1,11 @@
+.search-bar {
+  display: flex;
+  font-size: 21px;
+  color: white;
+  margin-bottom: 10px;
+  input {
+    height: 20px;
+    flex-grow: 1;
+    margin-right: 5px;
+  }
+}

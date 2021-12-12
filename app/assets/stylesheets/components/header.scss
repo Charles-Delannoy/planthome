@@ -2,6 +2,8 @@
   background-color: $green;
   height: $header-height;
   border-bottom: thin solid #fff;
+  position: fixed;
+  width: 100%;
   h1 {
     line-height: 55px;;
     font-weight: 200;
