@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'plants/index'
   get 'sessions/create'
   get 'sessions/destroy'
   post '/login',    to: 'sessions#create'
@@ -9,8 +10,10 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :users, only: [:create, :show, :index]
+  resources :plants, only: [:index]
 
   get '/home', to: 'pages#application'
+  get '/search', to: 'pages#application'
   get '/login', to: 'pages#application'
   get '/signup', to: 'pages#application'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
