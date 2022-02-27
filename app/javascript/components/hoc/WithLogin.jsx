@@ -7,7 +7,7 @@ const withLogin = (Component) => (props) => {
   const { isLoggedIn, handleLogin, handleLogout, loaded } = useContext(SessionContext)
 
   const loginStatus = () => {
-    axios.get('http://localhost:3001/logged_in',
+    axios.get(`/logged_in`,
       { withCredentials: true })
       .then(response => {
         if (response.data.logged_in) {
