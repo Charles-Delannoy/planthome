@@ -1,55 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import SearchBar from './SearchBar'
+import PlantsList from './PlantsList'
+
+const queryClient = new QueryClient();
 
 const Search = () => {
-  const [plants, setPlants] = useState([])
-  const [filteredPlants, setFilteredPlants] = useState(plants)
-  const [loaded, setLoaded] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-
-  const sortByName = (listToSort) => {
-    listToSort.sort((a, b) => a.name.localeCompare(b.name))
-  }
-
-  const updatePlants = () => {
-    setFilteredPlants(
-      plants.filter(
-        plant => plant.name.toLowerCase().includes(searchValue.toLowerCase())
-      )
-    )
-  }
-
-  useEffect(() => {
-    const retrievePlants = async () => {
-      if (!loaded) {
-        const response = await axios.get('/plants')
-        sortByName(response.data.plants)
-        setPlants(response.data.plants)
-        setFilteredPlants(response.data.plants)
-        setLoaded(true)
-      }
-    }
-    retrievePlants()
-  })
-
-  useEffect(() => {
-    updatePlants()
-    console.log(filteredPlants)
-  }, [searchValue])
-
-  const display_plants = filteredPlants.map((plant) => {
-    return (
-    <div key= {plant.id} className='plant-card'>
-      <h3>{plant.name}</h3>
-      <p>{plant.description}</p>
-    </div>
-    )
-  })
 
   return (
     <>
@@ -63,10 +25,32 @@ const Search = () => {
           </SearchBar>
           <FontAwesomeIcon icon={faSearch} />
         </div>
-        {display_plants}
+        <QueryClientProvider client={queryClient}>
+          <DisplayPlants searchValue={searchValue}/>
+        </QueryClientProvider>
       </div>
       <Footer />
     </>
+  )
+}
+
+const DisplayPlants = ({ searchValue }) => {
+  const { isLoading, error, data, isFetching } = useQuery("repoData", () =>
+    axios.get('/plants').then((res) => res.data.plants)
+  );
+
+  const sortByName = (listToSort) => {
+    return listToSort.sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  return (
+    <PlantsList list={ sortByName(searchValue ? data.filter(
+      plant => plant.name.toLowerCase().includes(searchValue.toLowerCase())
+    ) : data) } />
   )
 }
 
