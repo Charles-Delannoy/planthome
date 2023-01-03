@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const PlantsList = ({ list }) => {
   return (
@@ -7,6 +9,7 @@ const PlantsList = ({ list }) => {
         <div key={plant.id} className='plant-card'>
           <h3>{plant.name}</h3>
           <p>{plant.description}</p>
+          <button className='add-btn'><FontAwesomeIcon icon={faPlus} /></button>
         </div>
       )
     })

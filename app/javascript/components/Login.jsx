@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react'
+import { useMutation } from 'react-query'
 import { SessionContext } from './contexts/SessionContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -7,6 +8,21 @@ import Footer from './shared/Footer'
 
 const Login = (props) => {
   const { handleLogin } = useContext(SessionContext)
+
+  const loginMutation = useMutation( (user) => {
+    return axios.post(`/login`, { user }, { withCredentials: true })
+  }, { onSuccess: (response) => {
+    if (response.data.logged_in) {
+      handleLogin(response)
+      redirect()
+    } else {
+      setErrors(response.data.errors)
+    }
+    },
+    onError: (error) => {
+      console.log('api errors:', error)
+    }
+  })
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -28,16 +44,7 @@ const Login = (props) => {
       password: password
     }
 
-    axios.post(`/login`, { user }, { withCredentials: true })
-      .then(response => {
-        if (response.data.logged_in) {
-          handleLogin(response)
-          redirect()
-        } else {
-          setErrors(response.data.errors)
-        }
-      })
-      .catch(error => console.log('api errors:', error))
+    loginMutation.mutate(user)
   }
 
   return(

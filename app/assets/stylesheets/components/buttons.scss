@@ -3,3 +3,24 @@
   top: 17px;
   right: 10px;
 }
+
+.add-btn {
+  height: 20px;
+  width: 20px;
+  font-size: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: thin solid gray;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  transition: all ease 0.5s;
+  &:hover {
+    height: 25px;
+    width: 35px;
+    border-radius: 20px;
+  }
+}
